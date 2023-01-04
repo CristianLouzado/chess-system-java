@@ -1,11 +1,17 @@
 package chess_layer;
 
-public class ChessPiece {
+import board_layer.Board;
+import board_layer.Piece;
+
+public class ChessPiece extends Piece {
 	private Color color;
-	private int moveCount;
-	
-	//override ChessPosition()
-	private boolean isThereOpponentPiece(Position position) {
-		
+	public Color getColor() {
+		return color;
 	}
+
+	public ChessPiece(Board board, Color color) {
+		super(board);
+		this.color = color;
+	}
+
 }
