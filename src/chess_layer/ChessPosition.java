@@ -7,9 +7,11 @@ public class ChessPosition {
 	private int row;
 	
 	public Position toPosition() {
+		return null;
 		
 	}
 	public ChessPosition fromPosition(Position position) {
+		return null;
 		
 	}
 }
