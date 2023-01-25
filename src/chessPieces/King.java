@@ -8,6 +8,7 @@ import chess_layer.Color;
 
 public class King extends ChessPiece {
 
+	private ChessMatch chessMatch;
 	public King(Board board, Color color, ChessMatch chessMatch) {
 		super(board, color);
 	}
@@ -64,22 +65,44 @@ public class King extends ChessPiece {
 			mat[p.getRow()][p.getColumn()]=true;
 		}
 		
-		if(getMoveCount()==0 && !ChessMatch.getCheck()) {
-			Position poR1= new Position (position.getRow(), position.getColumn()+3);
-			if (testRookCastling(poR1)) {
-				Position p1 = new Position(position.getRow(),position.getColumn()+1);
-				Position p2 = new Position(position.getRow(),position.getColumn()+2);
-				if(getBoard().piece(p1)==null&&getBoard().piece(p2)==null) {
-					mat[position.getRow()][position.getColumn()+2]=true;
+		if (getColor()==Color.WHITE) {
+			if(getMoveCount()==0 && !chessMatch.getCheck()) {
+				Position poR1= new Position (position.getRow(), position.getColumn()-3);
+				if (testRookCastling(poR1)) {
+					Position p1 = new Position(position.getRow(),position.getColumn()-1);
+					Position p2 = new Position(position.getRow(),position.getColumn()-2);
+					if(getBoard().piece(p1)==null&&getBoard().piece(p2)==null) {
+						mat[position.getRow()][position.getColumn()-2]=true;
+					}
+				}
+				Position poR2= new Position (position.getRow(), position.getColumn()+4);
+				if (testRookCastling(poR2)) {
+					Position p3 = new Position(position.getRow(),position.getColumn()+1);
+					Position p4 = new Position(position.getRow(),position.getColumn()+2);
+					Position p5 = new Position(position.getRow(),position.getColumn()+3);
+					if(getBoard().piece(p3)==null&&getBoard().piece(p4)==null&&getBoard().piece(p5)==null) {
+						mat[position.getRow()][position.getColumn()+2]=true;
+					}
 				}
 			}
-			Position poR2= new Position (position.getRow(), position.getColumn()-4);
-			if (testRookCastling(poR2)) {
-				Position p1 = new Position(position.getRow(),position.getColumn()-1);
-				Position p2 = new Position(position.getRow(),position.getColumn()-2);
-				Position p3 = new Position(position.getRow(),position.getColumn()-3);
-				if(getBoard().piece(p1)==null&&getBoard().piece(p2)==null&&getBoard().piece(p3)==null) {
-					mat[position.getRow()][position.getColumn()-2]=true;
+		}else {
+			if(getMoveCount()==0 && !chessMatch.getCheck()) {
+				Position poR1= new Position (position.getRow(), position.getColumn()+3);
+				if (testRookCastling(poR1)) {
+					Position p1 = new Position(position.getRow(),position.getColumn()+1);
+					Position p2 = new Position(position.getRow(),position.getColumn()+2);
+					if(getBoard().piece(p1)==null&&getBoard().piece(p2)==null) {
+						mat[position.getRow()][position.getColumn()+2]=true;
+					}
+				}
+				Position poR2= new Position (position.getRow(), position.getColumn()-4);
+				if (testRookCastling(poR2)) {
+					Position p3 = new Position(position.getRow(),position.getColumn()-1);
+					Position p4 = new Position(position.getRow(),position.getColumn()-2);
+					Position p5 = new Position(position.getRow(),position.getColumn()-3);
+					if(getBoard().piece(p3)==null&&getBoard().piece(p4)==null&&getBoard().piece(p5)==null) {
+						mat[position.getRow()][position.getColumn()-2]=true;
+					}
 				}
 			}
 		}
